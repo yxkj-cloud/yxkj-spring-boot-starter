@@ -1,0 +1,14 @@
+{
+  "groups": [
+    {
+      "name": "yxkj",
+      "type": "cloud.yxkj.spring.starter.dds.YxkjDdsProperties",
+      "sourceType": "cloud.yxkj.spring.starter.dds.YxkjDdsProperties"
+    }, {
+      "name": "yxkj.dds",
+      "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "sourceType": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
+      "sourceMethod": "getDds()"
+    }
+  ]
+}
