@@ -27,8 +27,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,7 +53,7 @@ public class YxkjDdsAutoConfiguration {
             DataSource dataSource = val.initializeDataSourceBuilder().build();
             dataSourceMap.put(key, dataSource);
         });
-        return new YxkjDds(dataSourceMap);
+        return setActiveAndReturn(new YxkjDds(dataSourceMap));
     }
 
     @Bean
@@ -59,6 +61,13 @@ public class YxkjDdsAutoConfiguration {
     @ConditionalOnMultipleCandidate(DataSource.class)
     @Primary
     YxkjDds yxkjDdsWithPrimary(Map<String, DataSource> dataSourceMap) {
-        return new YxkjDds(new HashMap<>(dataSourceMap));
+        return setActiveAndReturn(new YxkjDds(new HashMap<>(dataSourceMap)));
+    }
+
+    private YxkjDds setActiveAndReturn(YxkjDds yxkjDds) {
+        List<String> defaultDs = yxkjDdsProperties.getDefaultDs();
+        defaultDs = defaultDs.isEmpty() ? new ArrayList<>(yxkjDdsProperties.getDds().keySet()) : defaultDs;
+        yxkjDds.setActive(defaultDs.toArray(new Object[0]));
+        return yxkjDds;
     }
 }

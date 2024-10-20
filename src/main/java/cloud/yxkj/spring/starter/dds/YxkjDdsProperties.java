@@ -22,7 +22,9 @@ import lombok.Setter;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @ConfigurationProperties(prefix = "yxkj")
@@ -30,6 +32,8 @@ import java.util.Map;
 @Setter
 public class YxkjDdsProperties {
     private Map<String, DataSourceProperties> dds = new LinkedHashMap<>();
+
+    private List<String> defaultDs = Collections.emptyList();
 
     private boolean enabledDds = true;
 }
