@@ -1,6 +1,8 @@
 package cloud.yxkj.spring.starter;
 
+import cloud.yxkj.spring.starter.env.SystemPropertiesLoader;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.ConfigurableBootstrapContext;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,6 +20,11 @@ import java.util.Objects;
  */
 @Slf4j
 public class YxkjStarterSpringApplicationRunListener implements SpringApplicationRunListener {
+    @Override
+    public void starting(ConfigurableBootstrapContext bootstrapContext) {
+        SystemPropertiesLoader.load();
+    }
+
     @Override
     public void started(ConfigurableApplicationContext context, Duration timeTaken) {
         log.info("=======================================================");

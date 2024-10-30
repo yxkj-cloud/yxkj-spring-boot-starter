@@ -36,4 +36,10 @@ public class YxkjStarterApplicationTest {
     void test_yxkj_dds_auto_config() {
         Assertions.assertNotNull(yxkjDds, "Yxkj动态数据源自动装配失败。");
     }
+
+    @Test
+    @DisplayName("测试加载系统参数")
+    void test_system_properties_load() {
+        Assertions.assertEquals("yxkj", System.getProperty("application.name"));
+    }
 }
